@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import Map, { MapRef } from "react-map-gl";
+import maplibregl from "maplibre-gl"; // eslint-disable-line import/no-webpack-loader-syntax
+import { useState, useRef } from "react";
+import "./App.css";
+import EntityLoader from "./EntityLoader";
+import LonLatInfo from "./components/LonLatInfo";
+import MapEvents from "./map/events";
+import Drawer from "./drawer/Drawer";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const mapRef = useRef<MapRef | null>(null);
+  const [viewState, setViewState] = useState({
+    longitude: 35,
+    latitude: 32,
+    zoom: 9,
+    pitch: 0,
+  });
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Map
+        ref={mapRef}
+        mapLib={maplibregl}
+        {...viewState}
+        localIdeographFontFamily="'Noto Sans', 'Noto Sans CJK SC', sans-serif"
+        onMove={(evt) => setViewState(evt.viewState)}
+        mapStyle="http://localhost:3650/api/maps/israel/style.json"
+      >
+        <EntityLoader />
+        <LonLatInfo />
+        <MapEvents/>
+        <Drawer/>
+      </Map>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
