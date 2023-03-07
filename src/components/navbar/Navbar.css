@@ -1,0 +1,11 @@
+.navbar {
+    background-color: rgb(57, 58, 60);
+    width: 100%;
+    color: white;
+    display: flex;
+    position: absolute;
+    bottom: 0px;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap :10px;
+}

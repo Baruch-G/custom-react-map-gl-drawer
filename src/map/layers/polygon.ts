@@ -13,33 +13,36 @@ const polygonFillLayer = {
       "case",
       ["==", ["feature-state", "selected"], true],
       0.7,
-      ["==", ["feature-state", "hover"], true],
-      0.4,
       0.2,
     ],
   },
   filter: ["==", "$type", "Polygon"] && ["==", ["get", "fill"], true],
 };
 
-const polygonOutlineLayer = {
-  id: "polygon-outline-layer",
+const polygonLineLayer = {
+  id: "polygon-line-layer",
   type: "line",
   source: "polygon-source",
   paint: {
-    "line-width": [
-      "case",
-      ["==", ["feature-state", "selected"], true],
-      4,
-      ["==", ["feature-state", "hover"], true],
-      2,
-      1,
-    ],
+    "line-width":3,
     "line-color": [
       "case",
       ["boolean", ["has", "color"], true],
       ["get", "color"],
       "gray",
     ],
+  },
+  filter: ["==", "$type", "Polygon"],
+};
+
+
+const polygonOutlineLayer = {
+  id: "polygon-outline-layer",
+  type: "line",
+  source: "polygon-source",
+  paint: {
+    "line-width": ["case", ["==", ["feature-state", "selected"], true], 5, 0],
+    "line-color": ["get", "contractColor"],
   },
   filter: ["==", "$type", "Polygon"],
 };
@@ -83,4 +86,4 @@ const fooPolygin = (id: string) => {
   };
 }
 
-export { polygonFillLayer, polygonOutlineLayer, polygonLabelLayer, fooPolygin };
+export { polygonFillLayer,polygonOutlineLayer, polygonLineLayer, polygonLabelLayer, fooPolygin };

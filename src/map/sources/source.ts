@@ -1,10 +1,10 @@
 import { AnyLayer } from "react-map-gl/dist/esm/types";
-import { polygonFillLayer, polygonOutlineLayer } from "../../layers/polygon";
-import { polylineLayer } from "../../layers/polyline";
-import { routeLayer } from "../../layers/route";
-import { pointLayer } from "../../layers/point";
-import { aircraftLayer } from "../../layers/aircraft";
-import { Layer } from "react-map-gl";
+import { polygonFillLayer, polygonOutlineLayer, polygonLineLayer } from "../layers/polygon";
+import { polylineLayer, polylineOutlineLayer } from "../layers/polyline";
+import { routeLayer, routeOutline, routePoints } from "../layers/route";
+import { pointLayer } from "../layers/point";
+import { aircraftLayer } from "../layers/aircraft";
+import { linkedPointLayer } from "../layers/linkedPoint";
 
 enum MapSources {
   POLYGON = "polygon-source",
@@ -17,19 +17,19 @@ enum MapSources {
 export const sources = [
   {
     id: MapSources.POLYGON,
-    layers: [polygonFillLayer, polygonOutlineLayer],
+    layers: [polygonFillLayer, polygonOutlineLayer, polygonLineLayer],
   },
   {
     id: MapSources.POLYLINE,
-    layers: [polylineLayer],
+    layers: [polylineOutlineLayer, polylineLayer],
   },
   {
     id: MapSources.ROUTE,
-    layers: [routeLayer],
+    layers: [ routeOutline,  routeLayer, routePoints],
   },
   {
     id: MapSources.POINT,
-    layers: [pointLayer],
+    layers: [pointLayer, linkedPointLayer],
   },
   {
     id: MapSources.AIRCRAFT,

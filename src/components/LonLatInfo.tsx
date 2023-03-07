@@ -24,13 +24,7 @@ const LonLatInfo = () => {
       </p>
       <p>{currMap?.getZoom()}</p>
 
-      <button onClick={() => {
-        const geojsonSource = currMap?.getSource(MapSources.AIRCRAFT) as GeoJSONSource;
-        geojsonSource.setData({
-          "type": "FeatureCollection",
-          "features": []
-        });
-      }}>hide planes</button>
+     
     </div>
   );
 };
